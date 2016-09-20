@@ -1,0 +1,58 @@
+{
+  "BASE_DIR": "~/projects/ibuilder_project",
+  "board":"uart",
+  "PROJECT_NAME":"example_project",
+  "TEMPLATE":"wishbone_template.json",
+  "SLAVES":{
+    "gpio1":{
+      "filename":"wb_gpio.v",
+      "bind":{
+        "gpio_out[1:0]":{
+          "loc":"led[1:0]",
+          "direction":"output"
+        },
+        "gpio_in[1:0]":{
+          "loc":"button[1:0]",
+          "direction":"input"
+        }
+      }
+    },
+    "sd_host":{
+      "filename":"wb_sd_host.v",
+      "bind":{
+        "o_sd_clk":{
+          "loc":"sd_hst_clk",
+          "direction":"output"
+        },
+        "io_sd_cmd":{
+          "loc":"sd_hst_cmd",
+          "direction":"inout"
+        },
+        "io_sd_data":{
+          "loc":"sd_hst_data[3:0]",
+          "direction":"inout"
+        }
+      }
+    }
+  },
+  "dependencies":[
+    "sd_sd4_phy.v",
+    "sd_host_defines.v",
+    "sd_host_stack_defines.v",
+    "sd_host_platform_spartan6.v",
+    "crc16_2bit.v"
+  ],
+  "bind": {
+    "clk": {
+      "direction": "input",
+      "loc": "clk"
+    },
+    "rst": {
+      "direction": "input",
+      "loc": "rst"
+    }
+  },
+  "constraint_files":[
+    "dionysus_sd_host.ucf"
+  ]
+}
